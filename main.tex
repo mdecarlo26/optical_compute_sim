@@ -1,0 +1,203 @@
+\documentclass[conference]{IEEEtran}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb}
+% Enhanced hyperref with basic options
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue]{hyperref}
+\usepackage{xcolor}
+
+\title{\textbf{Simulation of Optical Computing for High-Speed AI and Signal Processing}}
+\author{
+  \IEEEauthorblockN{Santiago Sosa \& Marc DeCarlo}
+  \IEEEauthorblockA{Department of Electrical and Computer Engineering\\ Drexel University\\
+  Emails: {ss5427@drexel.edu, mad534@drexel.edu} }
+}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+As modern electronic processors approach fundamental constraints in speed and power efficiency, optical computing has emerged as a potential solution for next-generation accelerators. By leveraging the natural parallelism and high bandwidth of light, photonic systems can theoretically perform computationally intensive operations, such as convolutions in neural networks, with lower energy and faster throughput than their electronic counterparts. In this proposal, we present a simulation-based study of optical computing architectures, focusing on Fourier-based convolutions, wavelength-division multiplexing for parallel data processing, and hybrid optical-electronic designs. Through structured experiments and benchmarks, we will compare the capabilities of simulated optical systems against state-of-the-art GPU- and FPGA-based solutions. This work seeks to provide concrete guidelines and performance insights for future hardware developments in photonic computing.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Optical Computing, Fourier Optics, Wavelength-Division Multiplexing, AI Acceleration, Signal Processing
+\end{IEEEkeywords}
+
+\section{Introduction}
+The demand for high-performance computing continues to rise, driven in large part by machine learning and real-time signal processing applications. While traditional silicon-based architectures have achieved impressive gains in speed and power efficiency, they are hindered by issues such as interconnect bottlenecks, dynamic power dissipation, and thermal limitations.
+
+Optical computing has the potential to address these constraints by using light for data representation and manipulation. Advantages include:
+\begin{itemize}
+    \item \textbf{Massive Parallelism}: Multiple wavelengths can be used simultaneously for parallel operations.
+    \item \textbf{Energy Efficiency}: Reduced resistive losses compared to electronic interconnects.
+    \item \textbf{High Throughput}: Optical links can reach terabit-per-second scales, supporting large datasets in AI applications.
+\end{itemize}
+
+Nonetheless, practical adoption of optical computing requires addressing physical phenomena such as diffraction, alignment, device tolerances, and the integration of non-linear components. This project proposes a comprehensive simulation effort that combines a realistic modeling of optical devices with AI workload benchmarks, ultimately providing insights into performance benefits, design trade-offs, and feasibility.
+
+\section{Objectives}
+Our research targets the following goals:
+\begin{enumerate}
+    \item \textbf{Fourier Optics Convolution Simulation}: Implement and test lens-based (or waveguide-based) Fourier transform modules that perform high-speed convolutions for deep learning and signal processing tasks.
+    \item \textbf{WDM Parallel Processing Model}: Simulate multi-wavelength optical channels to analyze the advantages and limitations of parallel data processing.
+    \item \textbf{Hybrid Optical-Electronic Pipeline}: Develop and benchmark an AI model wherein optical hardware conducts linear operations, while electronic processors provide non-linear activations.
+    \item \textbf{Performance Benchmarking}: Contrast the simulated optical systems with GPU- and FPGA-based solutions in terms of speed, power consumption, and model accuracy.
+    \item \textbf{Design Guidance}: Offer recommendations for eventual hardware prototypes, highlighting optimal component choices and system configurations.
+\end{enumerate}
+
+\section{Methodology}
+
+\subsection{Fourier Optics for Convolution}
+\begin{itemize}
+    \item Implement a 4\(f\) optical system simulation (in code) that performs 2D Fourier transforms for convolution or correlation tasks.
+    \item Incorporate realistic parameters such as lens distortions, alignment tolerance, and diffraction effects.
+    \item Validate the outputs by comparing them to standard digital FFT-based convolution results and measure potential losses or phase errors.
+\end{itemize}
+
+\subsection{Wavelength-Division Multiplexing (WDM)}
+\begin{itemize}
+    \item Simulate separate optical channels at distinct wavelengths to carry multiple data streams in parallel.
+    \item Investigate crosstalk, channel spacing, and signal-to-noise ratios to determine viable parallelism levels.
+    \item Evaluate performance gains over single-channel optical setups and compare to equivalent GPU-based parallelism.
+\end{itemize}
+
+\subsection{Hybrid Optical-Electronic AI Model}
+\begin{itemize}
+    \item Replace selected neural network layers (e.g., convolutional layers) with simulated optical blocks, while retaining electronic hardware for nonlinear activations.
+    \item Assess the impact of optical noise and quantization errors on overall model accuracy.
+    \item Analyze power overhead for electro-optical conversions and propose strategies for minimizing conversion bottlenecks.
+\end{itemize}
+
+\subsection{Performance Analysis}
+\begin{itemize}
+    \item \textbf{Speedup Factor}: Estimate execution time across various input sizes and optical parallelism levels.
+    \item \textbf{Energy Efficiency}: Approximate total power consumption by considering laser sources, modulators, detectors, and electronic overhead.
+    \item \textbf{Scalability}: Investigate how well the optical approach scales with increasing number of channels or model complexity.
+    \item \textbf{Accuracy}: Evaluate any degradation in AI performance caused by imperfect optical computation relative to purely electronic methods.
+\end{itemize}
+
+\section{Project Timeline}
+Optimized 60-Week Research Timeline\\[2mm]
+\textbf{Strategic Framework and Resource Allocation}
+
+\subsection*{Phase 1: Foundation \& Framework Development (14 weeks)}
+\textbf{Weeks 1-8: Theoretical Foundation}
+\begin{itemize}
+    \item Comprehensive literature synthesis across optical computing, AI architectures, and signal processing.
+    \item Development of a simulation framework architecture.
+    \item Initial validation methodology design.
+\end{itemize}
+\textbf{Weeks 9-14: Parallel Development Initiation}
+\begin{itemize}
+    \item Begin Fourier optics simulation framework.
+    \item Establish baseline electromagnetic modeling parameters.
+    \item Development of validation protocols.
+\end{itemize}
+
+\subsection*{Phase 2: Core Technical Development (24 weeks)}
+\textbf{Weeks 15-26: Parallel Technical Streams}
+\begin{itemize}
+    \item \textbf{Stream A: Fourier Optics Implementation}
+    \begin{itemize}
+        \item Detailed modeling of the 4f optical system.
+        \item Integration of realistic physical parameters.
+        \item Initial validation against conventional FFT methods.
+    \end{itemize}
+    \item \textbf{Stream B: WDM Architecture Development}
+    \begin{itemize}
+        \item Channel modeling and crosstalk analysis.
+        \item Parallel processing optimization.
+        \item Signal integrity validation.
+    \end{itemize}
+\end{itemize}
+\textbf{Weeks 27-38: Integration \& Optimization}
+\begin{itemize}
+    \item Hybrid system architecture development.
+    \item Cross-validation of optical and electronic components.
+    \item Performance optimization cycles.
+    \item Initial benchmarking against conventional systems.
+\end{itemize}
+
+\subsection*{Phase 3: System Integration \& Validation (14 weeks)}
+\textbf{Weeks 39-46: Comprehensive Integration}
+\begin{itemize}
+    \item Full system integration testing.
+    \item Performance optimization across all components.
+    \item Detailed error analysis and correction.
+    \item Benchmark refinement.
+\end{itemize}
+\textbf{Weeks 47-52: Advanced Validation}
+\begin{itemize}
+    \item Comparative analysis against electronic systems.
+    \item Statistical validation of performance metrics.
+    \item Optimization of hybrid interfaces.
+\end{itemize}
+
+\subsection*{Phase 4: Analysis \& Documentation (8 weeks)}
+\textbf{Weeks 53-60: Final Analysis and Dissemination}
+\begin{itemize}
+    \item Comprehensive performance analysis.
+    \item Documentation of methodologies and technical specifications.
+    \item Preparation of research publications and future research recommendations.
+\end{itemize}
+
+\section{Budget Considerations}
+Although much of the work is simulation-based, the scope of this project necessitates multiple resources, including robust computing infrastructure, specialized software, and personnel support. Table~\ref{table:budget} details the revised budget allocation.
+
+\begin{table}[h]
+\centering
+\caption{Resource Allocation Strategy}
+\label{table:budget}
+\begin{tabular}{|p{3.5cm}|p{4.8cm}|}
+\hline
+\textbf{Category} & \textbf{Details and Approx. Cost} \\
+\hline
+\textbf{Computing Infrastructure} & \begin{tabular}[c]{@{}l@{}} 
+- \$35,000 \\
+- Workstations \\
+- Parallel development capabilities \\
+- Enhanced storage for simulation data
+\end{tabular} \\
+\hline
+\textbf{Software \& Tools} & \begin{tabular}[c]{@{}l@{}} 
+- \$25,000 \\
+- Specialized simulation software \\
+- Development and optimization tools \\
+- Visualization and analysis packages
+\end{tabular} \\
+\hline
+\textbf{Personnel Support} & \begin{tabular}[c]{@{}l@{}} 
+- \$100,000 \\
+- Two graduate researchers \\
+- Part-time undergraduate assistance \\
+- Technical support staff
+\end{tabular} \\
+\hline
+\textbf{Knowledge Dissemination} & \begin{tabular}[c]{@{}l@{}} 
+- \$15,000 \\
+- Conference participation \\
+- Publication costs \\
+- Workshop organization
+\end{tabular} \\
+\hline
+\textbf{Total Revised Budget} & \$175,000 \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Expected Outcomes}
+By the end of this project, we aim to:
+\begin{itemize}
+    \item Establish a thorough simulation framework for optical computing in AI and signal processing contexts.
+    \item Quantify potential performance gains, energy efficiency, and accuracy trade-offs compared to electronic-only solutions.
+    \item Provide insight into optimal design parameters (e.g., channel spacing in WDM, lens characteristics, modulator requirements) that maximize throughput and minimize error.
+    \item Offer guidance for future physical prototypes, laying the groundwork for experimental validation.
+\end{itemize}
+
+\section{Conclusion}
+This proposal outlines a plan to investigate and simulate optical computing architectures that leverage Fourier optics and WDM parallelism for high-speed AI and signal processing tasks. By comparing these photonic approaches to conventional GPU and FPGA implementations, we seek to determine if optical methods can surmount the speed, power, and interconnect limitations of modern electronic systems. The findings will inform both the theoretical feasibility of all-optical or hybrid solutions and the practical considerations needed for their eventual realization.
+
+\section*{Acknowledgments}
+We would like to thank the Department of Electrical and Computer Engineering at Drexel University for providing support and access to essential resources.
+
+\end{document}
