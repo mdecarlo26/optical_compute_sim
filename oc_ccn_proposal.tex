@@ -1,0 +1,225 @@
+\documentclass[conference]{IEEEtran}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb}
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue]{hyperref}
+\usepackage{xcolor}
+
+\title{\textbf{End-to-End Optical Computing for CNN Inference: Simulation and Construction}}
+\author{
+  \IEEEauthorblockN{Santiago Sosa, Marc DeCarlo}
+  \IEEEauthorblockA{Department of Electrical and Computer Engineering\\ 
+  Drexel University\\
+  Emails: \{ss5427, mad534\}@drexel.edu}
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+As convolutional neural networks (CNNs) evolve in complexity, traditional electronic hardware struggles to meet increasing demands for throughput and energy efficiency. Optical computing, leveraging the high parallelism and low power dissipation inherent to photonics, offers a compelling alternative for next-generation AI accelerators. In this proposal, we hypothesize that a fully integrated end-to-end optical computing pipeline for CNN inference can outperform state-of-the-art electronic architectures in speed and energy efficiency. Our 60-week research plan encompasses an 8-week literature review and foundational theory phase, 28 weeks dedicated to simulation development and validation, and a final 24-week period for hardware testing, system integration, and performance analysis. A total budget of \$180,000 is requested to support personnel, equipment, software, and dissemination activities. By demonstrating both simulated and real-world feasibility, this work aims to provide a robust roadmap toward truly scalable photonic CNN inference systems.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Optical Computing, Photonics, CNN Inference, End-to-End Design, Non-linear Activation, Weight Embedding
+\end{IEEEkeywords}
+
+\section{Introduction}
+Convolutional Neural Networks (CNNs) underpin a wide range of machine learning applications, from image classification to natural language processing. As these models grow in size and complexity, limitations in electronic processing—such as interconnect bottlenecks, escalating power consumption, and thermal management—hamper their efficiency \cite{ref:jouppi2017datacenter}.
+
+\subsection{Motivation for Optical Computing}
+Optical computing harnesses the properties of light, including:
+\begin{itemize}
+    \item \textbf{High Bandwidth and Parallelism:} Spatial and wavelength-division multiplexing enable substantial parallel data throughput.
+    \item \textbf{Low Energy Dissipation:} Photons traverse waveguides with minimal resistive losses, reducing thermal loads.
+    \item \textbf{Fast Propagation:} Light signals travel significantly faster in waveguides and free-space, decreasing latency compared to electronic interconnects.
+\end{itemize}
+These attributes suggest a viable path to overcome pressing performance and energy bottlenecks in deep learning workloads.
+
+\subsection{Scope and Key Questions}
+We propose an end-to-end \emph{optical} pipeline for CNN inference, exploring:
+\begin{enumerate}
+    \item \textbf{Optical Convolutional (Conv) Layers:} Using lens-based (Fourier) or on-chip waveguide mesh approaches.
+    \item \textbf{Optical Fully Connected (FC) Layers:} Investigating large-scale optical dot-product engines and parallel summation schemes.
+    \item \textbf{Scaling and Model Size:} Evaluating how network depth and feature-map dimensions affect optical resource usage.
+    \item \textbf{Propagation Timing:} Analyzing latency contributions from device switching, free-space propagation, and waveguide travel.
+    \item \textbf{Non-linear Activation:} Examining possible photonic components or hybrid optoelectronic solutions for ReLU or similar functions.
+    \item \textbf{Weight Embedding:} Studying amplitude and phase encoding, as well as dynamic reprogramming for updatable model parameters.
+\end{enumerate}
+
+We will address these questions in a two-phase project comprising (1) a comprehensive simulation framework and (2) a laboratory-scale hardware prototype for validation.
+
+\section{Related Work}
+Recent studies have validated partial photonic computing for linear operations in matrix multiplication \cite{ref:shen2017deep, ref:harris2018linear}. However, integrating \emph{all} stages of a CNN—including non-linear activation—in a coherent optical environment remains underexplored. Our project builds upon these initial demonstrations, aiming to fill the gap of an \emph{end-to-end} pipeline where both Conv and FC layers, alongside activation and weight embedding, are realized photonicly.
+
+\section{Research Plan and Objectives}
+\subsection{Overall Goal}
+To design, simulate, and experimentally verify an end-to-end optical inference pipeline for CNNs, culminating in benchmarks that compare optical performance (speed, power efficiency, model accuracy) with electronic references (GPUs, TPUs).
+
+\subsection{Key Tasks}
+\begin{enumerate}
+    \item \textbf{OC Conv Layers:} Implement and simulate 2D optical convolutions using either:
+    \begin{itemize}
+        \item \emph{Free-space} 4$f$ lens systems, or
+        \item \emph{Integrated photonic waveguide} meshes.
+    \end{itemize}
+    \item \textbf{OC FC Layers:} Prototype optical dot-product engines with reconfigurable weights, exploring amplitude and phase modulation.
+    \item \textbf{Non-linear Activations:} Evaluate purely optical solutions (e.g., saturable absorbers, micro-ring resonator nonlinearities) or hybrid electronic circuits for thresholding.
+    \item \textbf{Hardware Construction:} Build a scaled proof-of-concept to validate simulation claims. This setup includes optical sources, modulators, lenses/waveguides, detectors, and electronic controllers (where absolutely necessary).
+\end{enumerate}
+
+\section{Methodology}
+
+\subsection{Phase 1: Literature Review \& Foundational Theory (Weeks 1--8)}
+\begin{itemize}
+    \item Intensive survey of existing optical computing literature, focusing on device-level physics, integrated photonics, free-space optics, and prior partial CNN accelerators.
+    \item Formulate baseline CNN architectures (e.g., smaller benchmark models from MNIST or CIFAR-10) to guide design specifications.
+    \item Finalize simulation tool chain (MATLAB/Python for neural nets, photonic CAD tools for circuit-level designs).
+\end{itemize}
+
+\subsection{Phase 2: Simulation Development \& Validation (Weeks 9--36)}
+\textbf{(28 weeks total)}
+
+\subsubsection{Optical Convolution \& FC Layers (Weeks 9--22)}
+\begin{itemize}
+    \item Construct an optical convolution model (4$f$ system or waveguide mesh) in simulation, incorporating realistic parameters like lens/aperture limitations, coupling losses, and phase errors.
+    \item Develop an optical FC layer using either free-space optics with pixelated spatial light modulators (SLMs) or integrated photonic chips employing micro-ring modulators. 
+    \item Validate each component against software-based reference computations (FFT-based convolution, matrix multiplication) to quantify accuracy losses.
+\end{itemize}
+
+\subsubsection{Activation \& Weight Embedding (Weeks 23--28)}
+\begin{itemize}
+    \item Model candidate optical nonlinearities: saturable absorbers, Kerr-based waveguides, or Mach-Zehnder modulator-based thresholding.
+    \item Integrate non-linear modules into the network simulation; measure final CNN accuracy on small datasets.
+    \item Explore phase vs. amplitude encoding for weight parameters. Evaluate WDM for parallelism if time and resources allow.
+\end{itemize}
+
+\subsubsection{System-Level Integration \& Testing (Weeks 29--36)}
+\begin{itemize}
+    \item Combine optical Conv, FC, and activation modules into a unified pipeline simulation.
+    \item Perform timing analysis to ensure signals arrive in sync; manage any electro-optical conversion overhead.
+    \item Conduct thorough validation with standard CNN benchmarks (MNIST, small CIFAR-10 subset) to establish performance, power, and accuracy estimates.
+\end{itemize}
+
+\subsection{Phase 3: Hardware Testing \& Validation (Weeks 37--52)}
+\begin{itemize}
+    \item \textbf{Device Acquisition:} Procure lenses, mirrors, modulators, waveguide components, detectors, and SLMs as per final simulation specs.
+    \item \textbf{Assembly \& Alignment:} Construct a simplified but functional hardware pipeline that mirrors the simulated model (e.g., a single Conv layer and FC layer with a limited number of channels).
+    \item \textbf{Measurement \& Calibration:} Characterize insertion losses, alignment tolerances, timing jitter, and power usage.
+    \item \textbf{Functional Testing:} Evaluate inference performance on small CNN tasks (MNIST or CIFAR-10). Compare accuracy and throughput with purely electronic baselines.
+\end{itemize}
+
+\subsection{Phase 4: Final Analysis and System Optimization (Weeks 53--60)}
+\begin{itemize}
+    \item \textbf{Data Synthesis:} Combine simulation and hardware data to refine the optical device models and propose design improvements.
+    \item \textbf{Scalability Exploration:} Assess how the prototype can scale to larger networks. Present best practices for lens sizing, waveguide count, or modulator density.
+    \item \textbf{Dissemination:} Prepare conference papers, journal articles, and final project documentation.
+\end{itemize}
+
+\section{Timeline Overview}
+Table~\ref{tab:timeline} summarizes the phases over 60 weeks:
+
+\begin{table}[h]
+\centering
+\caption{60-Week Timeline}
+\label{tab:timeline}
+\begin{tabular}{|c|p{5.5cm}|}
+\hline
+\textbf{Weeks} & \textbf{Activities} \\
+\hline
+1--8 & Literature review \& foundational theory \\
+\hline
+9--22 & Optical Conv/FC simulation \& validation \\
+\hline
+23--28 & Activation \& weight embedding simulations \\
+\hline
+29--36 & System-level integration \& final simulation tests \\
+\hline
+37--52 & Hardware assembly, lab testing, measurements \\
+\hline
+53--60 & Final analysis, optimization, and publications \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Budget}
+We request a fixed budget of \textbf{\$180,000}, allocated as detailed in Table~\ref{tab:budget}:
+
+\begin{table}[h]
+\centering
+\caption{Budget Breakdown}
+\label{tab:budget}
+\begin{tabular}{|p{3.2cm}|p{4.7cm}|}
+\hline
+\textbf{Category} & \textbf{Amount (USD)} \\
+\hline
+\textbf{Personnel} & 
+\begin{tabular}[c]{@{}l@{}}
+- \$95,000 \\
+- Graduate researchers \\
+- Part-time undergraduate assistance \\
+- Technical support staff
+\end{tabular}
+\\
+\hline
+\textbf{Equipment \& Consumables} &
+\begin{tabular}[c]{@{}l@{}}
+- \$45,000 \\
+Optical components (lenses, mirrors, \\
+waveguides, modulators, detectors) \\
+SLMs and mechanical fixtures
+\end{tabular}
+\\
+\hline
+\textbf{Software \& Tools} &
+\begin{tabular}[c]{@{}l@{}}
+- \$20,000 \\
+Photonic simulation licenses, \\
+Numerical libraries, HPC resources
+\end{tabular}
+\\
+\hline
+\textbf{Travel \& Dissemination} &
+\begin{tabular}[c]{@{}l@{}}
+- \$10,000 \\
+Conference travel \\
+Publication costs
+\end{tabular}
+\\
+\hline
+\textbf{Contingency} & 
+\$10,000 \\
+\hline
+\textbf{Total} & 
+\$180,000 \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Expected Contributions}
+\begin{itemize}
+    \item \textbf{Simulation Toolkit:} A robust framework for exploring optical CNN design trade-offs, including convolution, FC layers, weight encoding, and optical activation.
+    \item \textbf{Lab Prototype:} Empirical demonstration of a partial optical inference pipeline, verifying theoretical results.
+    \item \textbf{Performance Benchmarks:} Metrics comparing speed, accuracy, and energy use to standard electronic platforms.
+    \item \textbf{Publications and Presentations:} Dissemination of research outcomes in top-tier conferences and journals, fostering broader adoption and optimization of photonic AI.
+\end{itemize}
+
+\section{Conclusion}
+As CNNs continue to stress the limits of electronic hardware, optical computing stands out as a promising avenue for high-throughput, energy-efficient inference. By integrating optical components for both convolutional and fully connected layers—and addressing the complexities of non-linearity, weight embedding, and timing—this project aspires to demonstrate a viable end-to-end photonic solution. Over a 60-week period, we will combine thorough simulation studies with a working hardware prototype to quantify performance gains and chart a path toward large-scale optical neural networks.
+
+\section*{Acknowledgments}
+We would like to thank the Department of Electrical and Computer Engineering at Drexel University for providing the necessary facilities and support. We also acknowledge the broader photonics research community for ongoing discussions and insights.
+
+\bibliographystyle{IEEEtran}
+\begin{thebibliography}{00}
+\bibitem{ref:jouppi2017datacenter}
+N. P. Jouppi \emph{et al.}, ``In-datacenter performance analysis of a tensor processing unit,'' in \textit{Proc. ISCA}, 2017, pp. 1--12.
+
+\bibitem{ref:shen2017deep}
+Y. Shen \emph{et al.}, ``Deep learning with coherent nanophotonic circuits,'' \textit{Nature Photonics}, vol. 11, no. 7, pp. 441--446, 2017.
+
+\bibitem{ref:harris2018linear}
+N. C. Harris \emph{et al.}, ``Linear programmable nanophotonic processors,'' \textit{Optica}, vol. 5, no. 12, pp. 1623--1631, 2018.
+\end{thebibliography}
+
+\end{document}
