@@ -1,0 +1,200 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb}
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue]{hyperref}
+\usepackage{xcolor}
+
+\title{\textbf{End-to-End ONN Architecture}}
+
+\author{
+  \IEEEauthorblockN{Santiago Sosa, Marc DeCarlo}
+  \IEEEauthorblockA{Department of Electrical and Computer Engineering\\ 
+  Drexel University\\
+  Emails: \{ss5427, mad534\}@drexel.edu}
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This paper proposes an end-to-end Optical Neural Network (ONN) architecture for CNN inference that leverages programmable Mach-Zehnder Interferometers (MZIs) for dynamic weight control, and incorporates non-linear activations and bias functionalities. Our work focuses exclusively on a simulation-based approach, developing a comprehensive mathematical and theoretical framework to model optical convolution, fully connected (FC) layers, and non-linear operations in an ONN. Key research questions include: (1) How many MZIs are required and how can their usage be optimized? (2) What are the scalability limits of the proposed ONN architecture? (3) What efficiency gains (speed-up, FLOPs, and energy consumption) can be expected relative to state-of-the-art electronic accelerators? Our 26-week research plan consists of an 8-week literature review and theory phase, a 12-week simulation development and optimization phase, and a final 6-week analysis and dissemination phase. A budget of \$70,000 is requested to support personnel, software licenses, HPC resources, and dissemination activities.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Optical Neural Networks, Programmable MZIs, ONN Architecture, CNN Inference, Non-linear Activation, Bias, Scalability, Efficiency.
+\end{IEEEkeywords}
+
+\section{Introduction}
+Convolutional Neural Networks (CNNs) are fundamental to modern AI applications, but increasing model complexity challenges conventional electronic hardware due to interconnect bottlenecks, escalating power consumption, and thermal constraints \cite{ref:jouppi2017datacenter}. Optical computing offers an attractive alternative by leveraging high bandwidth, inherent parallelism, and low energy dissipation. 
+
+In this work, we propose an end-to-end ONN architecture that simulates an integrated optical pipeline for CNN inference. Our design employs programmable Mach-Zehnder Interferometers (MZIs) for dynamic weight modulation, incorporates non-linear activation and bias functions, and spans from optical convolutional layers to fully connected layers. Key research questions include:
+\begin{enumerate}
+    \item \textbf{MZI Optimization:} How many MZIs are required for a given network size, and what strategies optimize their usage?
+    \item \textbf{Scalability:} What are the scalability limits of the ONN architecture as network depth and feature dimensions increase?
+    \item \textbf{Efficiency Metrics:} How does the performance (speed-up, FLOPs, energy consumption) compare with electronic accelerators?
+\end{enumerate}
+
+\section{Related Work}
+Previous studies have demonstrated optical implementations of linear operations such as matrix multiplication \cite{ref:shen2017deep, ref:harris2018linear} and partial photonic neural networks. However, integrating all stages of a CNN—especially non-linear activations and bias functions—into a fully optical environment remains largely unexplored. Our project extends the literature by proposing a holistic, simulation-based ONN architecture that addresses these gaps using programmable MZIs.
+
+\section{Research Plan and Objectives}
+\subsection{Overall Goal}
+Our primary objective is to design, simulate, and analyze a full ONN pipeline for CNN inference. This includes:
+\begin{itemize}
+    \item Simulation of the ONN architecture with integrated non-linear activations and bias.
+    \item Development of fully connected layers using programmable MZIs.
+    \item Evaluation of MZI optimization, scalability, and efficiency metrics (speed, FLOPs, energy consumption).
+\end{itemize}
+
+\subsection{Key Tasks}
+\begin{enumerate}
+    \item \textbf{ONN Convolutional Layers:} Simulate 2D optical convolutions using free-space 4\(f\) systems or integrated photonic waveguide meshes.
+    \item \textbf{ONN Fully Connected Layers:} Model optical dot-product operations using programmable MZIs with bias integration.
+    \item \textbf{Non-linear Activation:} Simulate optical or hybrid non-linear activation mechanisms (e.g., saturable absorbers, micro-ring resonators).
+    \item \textbf{System Integration and Benchmarking:} Integrate the simulated modules into a unified ONN pipeline and compare performance with digital counterparts.
+    \item \textbf{Optimization Studies:} Address MZI optimization, determine the optimal number for various network sizes, and explore scalability.
+\end{enumerate}
+
+\section{Methodology}
+The project is structured into three phases over a total of 26 weeks.
+
+\subsection{Phase 1: Literature Review \& Theoretical Foundations (Weeks 1--8)}
+\begin{itemize}
+    \item Conduct an in-depth literature survey on ONNs, programmable MZIs, and optical CNN inference.
+    \item Review the fundamental math behind Fourier optics, optical matrix multiplication, and non-linear optical phenomena.
+    \item Develop rigorous mathematical models for:
+    \begin{itemize}
+        \item Optical convolution (using Fourier-based or waveguide models)
+        \item Fully connected layers using programmable MZIs (including bias integration)
+        \item Optical non-linear activation mechanisms
+    \end{itemize}
+    \item Finalize the simulation toolchain (MATLAB/Python for neural nets, photonic CAD tools for optical models).
+\end{itemize}
+
+\subsection{Phase 2: Simulation Development \& Optimization (Weeks 9--20)}
+\begin{itemize}
+    \item \textbf{Weeks 9--14:}
+    \begin{itemize}
+        \item Implement the mathematical models into simulation code.
+        \item Simulate individual ONN components (convolution, FC layers, activations) and validate against theoretical predictions.
+        \item Perform parameter sensitivity analysis (e.g., phase errors, coupling losses, MZI configuration).
+    \end{itemize}
+    \item \textbf{Weeks 15--20:}
+    \begin{itemize}
+        \item Integrate individual modules into a unified ONN simulation pipeline.
+        \item Model complete CNN inference with integrated bias and non-linear activation.
+        \item Benchmark simulation results against standard digital operations to assess accuracy and efficiency.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Phase 3: Analysis, Scalability Evaluation \& Dissemination (Weeks 21--26)}
+\begin{itemize}
+    \item \textbf{Weeks 21--24:}
+    \begin{itemize}
+        \item Analyze simulation data to determine scalability limits (e.g., optimal MZI count, network size).
+        \item Evaluate efficiency metrics: speed-up, theoretical FLOPs, and energy consumption improvements.
+    \end{itemize}
+    \item \textbf{Weeks 25--26:}
+    \begin{itemize}
+        \item Compile simulation results and develop design guidelines.
+        \item Prepare technical documentation, conference papers, and journal submissions.
+    \end{itemize}
+\end{itemize}
+
+\section{Timeline Overview}
+Table~\ref{tab:timeline} summarizes the 26-week plan:
+
+\begin{table}[h]
+\centering
+\caption{26-Week Timeline}
+\label{tab:timeline}
+\begin{tabular}{|c|p{5.5cm}|}
+\hline
+\textbf{Weeks} & \textbf{Activities} \\
+\hline
+1--8 & Literature review, theory, and model development \\
+\hline
+9--14 & Implementation of individual ONN modules and parameter sensitivity analysis \\
+\hline
+15--20 & Integration of modules into a unified ONN simulation and benchmarking \\
+\hline
+21--24 & Scalability and efficiency analysis; optimization studies \\
+\hline
+25--26 & Documentation, dissemination, and preparation of publications \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Budget}
+We request a total budget of \textbf{\$70,000} to support the simulation-only project:
+\begin{table}[h]
+\centering
+\caption{Budget Breakdown}
+\label{tab:budget}
+\begin{tabular}{|p{3.2cm}|p{4.7cm}|}
+\hline
+\textbf{Category} & \textbf{Amount (USD)} \\
+\hline
+\textbf{Personnel} & 
+\begin{tabular}[c]{@{}l@{}}
+- \$40,000 \\
+(Graduate student tuition and stipends, \\
+Undergraduate research support)
+\end{tabular}
+\\
+\hline
+\textbf{Software \& Tools} &
+\begin{tabular}[c]{@{}l@{}}
+- \$15,000 \\
+(Licenses for photonic simulation software, \\
+numerical libraries, HPC resources)
+\end{tabular}
+\\
+\hline
+\textbf{Travel \& Dissemination} &
+\begin{tabular}[c]{@{}l@{}}
+- \$10,000 \\
+(Conference travel, publication fees)
+\end{tabular}
+\\
+\hline
+\textbf{Contingency} & 
+\$5,000 \\
+\hline
+\textbf{Total} & 
+\$70,000 \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Expected Contributions}
+\begin{itemize}
+    \item \textbf{ONN Simulation Toolkit:} A comprehensive framework for modeling optical convolution, fully connected layers (with bias), and non-linear activations using programmable MZIs.
+    \item \textbf{Theoretical Analysis:} Rigorous mathematical models and sensitivity analysis that provide insights into parameter optimization and scalability.
+    \item \textbf{Performance Benchmarking:} Evaluation of efficiency metrics (speed, FLOPs, energy savings) compared to conventional electronic accelerators.
+    \item \textbf{Design Guidelines:} Actionable recommendations for future large-scale ONN implementations based on simulation findings.
+    \item \textbf{Publications and Dissemination:} Research outcomes disseminated through top-tier conferences and journal articles.
+\end{itemize}
+
+\section{Conclusion}
+This proposal outlines an ambitious simulation-based study of an end-to-end ONN architecture for CNN inference. By integrating rigorous theoretical models with comprehensive simulation studies, we aim to address key questions related to MZI optimization, scalability, and efficiency. The anticipated improvements in speed and energy efficiency will contribute to the development of sustainable AI accelerators, paving the way for next-generation optical computing systems.
+
+\section*{Acknowledgments}
+The authors gratefully acknowledge the support of the Department of Electrical and Computer Engineering at Drexel University and the insights provided by the broader photonics research community.
+
+\bibliographystyle{IEEEtran}
+\begin{thebibliography}{00}
+\bibitem{ref:jouppi2017datacenter}
+N. P. Jouppi \emph{et al.}, ``In-datacenter performance analysis of a tensor processing unit,'' in \textit{Proc. ISCA}, 2017, pp. 1--12.
+
+\bibitem{ref:shen2017deep}
+Y. Shen \emph{et al.}, ``Deep learning with coherent nanophotonic circuits,'' \textit{Nature Photonics}, vol. 11, no. 7, pp. 441--446, 2017.
+
+\bibitem{ref:harris2018linear}
+N. C. Harris \emph{et al.}, ``Linear programmable nanophotonic processors,'' \textit{Optica}, vol. 5, no. 12, pp. 1623--1631, 2018.
+\end{thebibliography}
+
+\end{document}
