@@ -1,0 +1,58 @@
+        ┌───────────────────────────────────────────────────────────┐
+        │                  Laser Source(s)                          │
+        │   (Provides coherent light for the entire network)        │
+        └───────────────────────────┬───────────────────────────────┘
+                                    │  (High-power beam or multiple beams)
+                                    ▼
+┌───────────────────────────────────────────────────────────────────────────────────┐
+│   Data Encoding / Input Modulation                                                │
+│   - Spatial Light Modulator (SLM), DMD, or On-Chip Modulators                     │
+│     (Encodes each input pixel/feature as an optical amplitude/phase)              │
+└───────────────────────────┬───────────────────────────────────────────────────────┘
+                            │  
+                            │  
+                            ▼
+┌───────────────────────────────────────────────────────────────────────────────────┐
+│         Optical Convolutional Layer (Single Convolution Stage)                    │
+│  1) Convolution Kernel Implementation                                             │
+│     - Free-Space: Lens-based Fourier Transform + Multiplicative Filter Masks      │
+│         or diffractive elements, each representing a kernel.                      │
+│     - Integrated Photonics: MZI meshes / waveguide splitters that perform         │
+│         local weighted sums of input patches.                                     │
+│  2) Summation of filter outputs (per kernel)                                      │
+│  3) Optional on-chip amplifier to counter splitting losses                        │
+└───────────────────────────┬───────────────────────────────────────────────────────┘
+                            │  (Now we have the “feature maps” from the conv layer)
+                            ▼
+┌───────────────────────────────────────────────────────────────────────────────────┐
+│  Optical Nonlinearity (Activation Function)                                       │
+│  - Semiconductor Optical Amplifier (SOA) in saturation mode, or                   │
+│    saturable absorber, or ring resonator for a ReLU/sigmoid-like curve.           │
+│  - One nonlinear device per feature map channel (per pixel in the map)            │
+└───────────────────────────┬───────────────────────────────────────────────────────┘
+                            │  (Output intensities represent post-activation feature maps)
+                            ▼
+┌───────────────────────────────────────────────────────────────────────────────────┐
+│    Optical Fully Connected (FC) Layer                                             │
+│  1) Fan-Out / Split: Each of the conv-layer outputs is split to feed all          │
+│     neurons in the FC layer.                                                      │
+│  2) Weights via Mach-Zehnder Interferometer (MZI) arrays or variable attenuators  │
+│     - Each partial path from conv-output i → neuron j has a tunable weight.       │
+│  3) Summation by interference at each neuron’s waveguide.                         │
+│  4) Optical Bias Addition                                                         │
+│     - Extra “constant” waveguide for each neuron, weighted by MZIs for bias.      │
+└───────────────────────────┬───────────────────────────────────────────────────────┘
+                            │  (We now have M outputs corresponding to the M FC neurons)
+                            ▼
+┌───────────────────────────────────────────────────────────────────────────────────┐
+│  (Optional) Second Optical Nonlinearity (for the FC layer’s activation)           │
+│  - Same saturable absorber / SOA / ring-based scheme if a ReLU is needed again.   │
+└───────────────────────────┬───────────────────────────────────────────────────────┘
+                            │
+                            ▼
+┌───────────────────────────────────────────────────────────────────────────────────┐
+│   Optical or Hybrid Readout                                                       │
+│   - If this is the final output, a small photodiode array or winner-take-all      │
+│     optical circuit can determine which neuron is strongest.                      │
+│   - For classification: measure each output waveguide’s intensity.                │
+└───────────────────────────────────────────────────────────────────────────────────┘
