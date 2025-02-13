@@ -20,7 +20,7 @@
 \maketitle
 
 \begin{abstract}
-This paper proposes an end-to-end Optical Neural Network (ONN) architecture for CNN inference that leverages programmable Mach-Zehnder Interferometers (MZIs) for dynamic weight control, and incorporates non-linear activations and bias functionalities. Our work focuses exclusively on a simulation-based approach, developing a comprehensive mathematical and theoretical framework to model optical convolution, fully connected (FC) layers, and non-linear operations in an ONN. Key research questions include: (1) How many MZIs are required and how can their usage be optimized? (2) What are the scalability limits of the proposed ONN architecture? (3) What efficiency gains (speed-up, FLOPs, and energy consumption) can be expected relative to state-of-the-art electronic accelerators? Our 26-week research plan consists of an 8-week literature review and theory phase, a 12-week simulation development and optimization phase, and a final 6-week analysis and dissemination phase. A budget of \$70,000 is requested to support personnel, software licenses, HPC resources, and dissemination activities.
+This paper proposes an end-to-end Optical Neural Network (ONN) architecture for CNN inference that leverages programmable Mach-Zehnder Interferometers (MZIs) for dynamic weight control, and incorporates non-linear activations and bias functionalities. Our work focuses exclusively on a simulation-based approach, developing a comprehensive mathematical and theoretical framework to model optical convolution, fully connected (FC) layers, and non-linear operations in an ONN. Our 26-week research plan consists of an 8-week literature review and theory phase, a 12-week simulation development and optimization phase, and a final 6-week analysis and dissemination phase. A budget of \$70,000 is requested to support personnel, software licenses, HPC resources, and dissemination activities.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -38,7 +38,7 @@ In this work, we propose an end-to-end ONN architecture that simulates an integr
 \end{enumerate}
 
 \section{Related Work}
-Previous studies have demonstrated optical implementations of linear operations such as matrix multiplication \cite{ref:shen2017deep, ref:harris2018linear} and partial photonic neural networks. However, integrating all stages of a CNN—especially non-linear activations and bias functions—into a fully optical environment remains largely unexplored. Our project extends the literature by proposing a holistic, simulation-based ONN architecture that addresses these gaps using programmable MZIs.
+Previous studies have demonstrated optical implementations of linear operations such as matrix multiplication \cite{ref:shen2017deep, ref:harris2018linear} and partial photonic neural networks \cite{ref:recent_developments}. However, integrating all stages of a CNN—especially non-linear activations and bias functions—into a fully optical environment remains largely unexplored. Our project extends the literature by proposing a holistic, simulation-based ONN architecture that addresses these gaps using programmable MZIs.
 
 \section{Research Plan and Objectives}
 \subsection{Overall Goal}
@@ -71,7 +71,7 @@ The project is structured into three phases over a total of 26 weeks.
         \item Fully connected layers using programmable MZIs (including bias integration)
         \item Optical non-linear activation mechanisms
     \end{itemize}
-    \item Finalize the simulation toolchain (MATLAB/Python for neural nets, photonic CAD tools for optical models).
+    \item Finalize the simulation toolchain for integration in subsequent phases.
 \end{itemize}
 
 \subsection{Phase 2: Simulation Development \& Optimization (Weeks 9--20)}
@@ -100,6 +100,7 @@ The project is structured into three phases over a total of 26 weeks.
     \item \textbf{Weeks 25--26:}
     \begin{itemize}
         \item Compile simulation results and develop design guidelines.
+        \item Organize full optical toolkit for photonic circuit simulation.
         \item Prepare technical documentation, conference papers, and journal submissions.
     \end{itemize}
 \end{itemize}
@@ -149,7 +150,7 @@ Undergraduate research support)
 \textbf{Software \& Tools} &
 \begin{tabular}[c]{@{}l@{}}
 - \$15,000 \\
-(Licenses for photonic simulation software, \\
+(Licenses for software, \\
 numerical libraries, HPC resources)
 \end{tabular}
 \\
@@ -195,6 +196,13 @@ Y. Shen \emph{et al.}, ``Deep learning with coherent nanophotonic circuits,'' \t
 
 \bibitem{ref:harris2018linear}
 N. C. Harris \emph{et al.}, ``Linear programmable nanophotonic processors,'' \textit{Optica}, vol. 5, no. 12, pp. 1623--1631, 2018.
+
+\bibitem{ref:recent_developments}
+A. M. McNeil, Y. Li, A. Zhang, M. Moebius, and Y. Liu, “Fundamentals and recent developments of free-space optical neural networks,” Journal of Applied Physics, vol. 136, no. 3, p. 030701, 2024
+
+\bibitem{ref:liao2021all}
+K. Liao \emph{et al.}, ``All-optical computing based on convolutional neural networks,'' \textit{Opto-Electronic Advances}, vol. 4, no. 11, p. 200060, 2021. doi: 10.29026/oea.2021.200060.
+
 \end{thebibliography}
 
 \end{document}
