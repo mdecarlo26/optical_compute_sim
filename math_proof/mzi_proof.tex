@@ -23,14 +23,14 @@ This section provides a rigorous mathematical derivation of beam splitters, mirr
 \subsection{Beam Splitters}
 A 50:50 beam splitter transforms the input field amplitudes as follows:
 \begin{equation}
-BS = \frac{1}{\sqrt{2}} \begin{bmatrix} 1 & i \\ i & 1 \end{bmatrix}.
+B = \frac{1}{\sqrt{2}} \begin{bmatrix} 1 & i \\ i & 1 \end{bmatrix}.
 \end{equation}
 This matrix ensures energy conservation and unitary behavior.
 
 \subsubsection{Proof of Beam Splitter Matrix}
 To show that the beam splitter matrix is unitary, we compute:
 \begin{equation}
-BS^H BS = \frac{1}{2} \begin{bmatrix} 1 & -i \\ -i & 1 \end{bmatrix} \begin{bmatrix} 1 & i \\ i & 1 \end{bmatrix} = I.
+B^H B = \frac{1}{2} \begin{bmatrix} 1 & -i \\ -i & 1 \end{bmatrix} \begin{bmatrix} 1 & i \\ i & 1 \end{bmatrix} = I.
 \end{equation}
 This confirms that the beam splitter transformation preserves norm and is unitary.
 \subsection{\textbf{Derivation of the Beam Splitter Matrix}}
@@ -45,17 +45,17 @@ where:
 - \( E_1^{\text{in}} \) represents the field entering from port 1.
 - \( E_2^{\text{in}} \) represents the field entering from port 2.
 
-The output fields \( E_1^{\text{out}}, E_2^{\text{out}} \) are related to the input by a transformation matrix \( BS \):
+The output fields \( E_1^{\text{out}}, E_2^{\text{out}} \) are related to the input by a transformation matrix \( B \):
 
 \begin{equation}
-    \begin{bmatrix} E_1^{\text{out}} \\ E_2^{\text{out}} \end{bmatrix} = BS \begin{bmatrix} E_1^{\text{in}} \\ E_2^{\text{in}} \end{bmatrix}
+    \begin{bmatrix} E_1^{\text{out}} \\ E_2^{\text{out}} \end{bmatrix} = B \begin{bmatrix} E_1^{\text{in}} \\ E_2^{\text{in}} \end{bmatrix}
 \end{equation}
 
 \subsubsection{\textbf{Form of the Beam Splitter Matrix}}
 By experimental observation and symmetry considerations, the transformation must be \textbf{unitary} and \textbf{preserve energy}. We assume the general form:
 
 \begin{equation}
-BS =
+B =
 \begin{bmatrix}
     t & r \\
     r & t
@@ -73,10 +73,10 @@ Energy conservation in an optical system requires that the total intensity (powe
     |E_1^{\text{out}}|^2 + |E_2^{\text{out}}|^2 = |E_1^{\text{in}}|^2 + |E_2^{\text{in}}|^2.
 \end{equation}
 
-This implies that \( BS \) must be \textbf{unitary}, meaning:
+This implies that \( B \) must be \textbf{unitary}, meaning:
 
 \begin{equation}
-    BS^\dagger BS = I.
+    B^\dagger B = I.
 \end{equation}
 
 Expanding,
@@ -129,7 +129,7 @@ which satisfies the unitary condition:
 Thus, the \textbf{beam splitter matrix} is:
 
 \begin{equation}
-BS =
+B =
 \frac{1}{\sqrt{2}}
 \begin{bmatrix}
     1 & i \\
@@ -141,7 +141,7 @@ BS =
 To verify that this matrix is \textbf{unitary}, we compute:
 
 \begin{equation}
-    BS^\dagger BS =
+    B^\dagger B =
     \frac{1}{\sqrt{2}}
     \begin{bmatrix}
         1 & -i \\
@@ -182,7 +182,7 @@ where \( \phi \) and \( \psi \) are phase shifts depending on the optical path.
 \section{Mach-Zehnder Interferometer (MZI)}
 An MZI consists of two beam splitters and phase shifters, modeled as:
 \begin{equation}
-U_{\text{MZI}} = BS P BS,
+U_{\text{MZI}} = B P B,
 \end{equation}
 where \( P \) is a diagonal phase shift matrix:
 \begin{equation}
@@ -210,7 +210,7 @@ A = Q T Q^H.
 \subsection{Implementing Q Using Fixed Beam Splitters}
 Since MZIs implement unitary matrices of the form:
 \begin{equation}
-BS = \frac{1}{\sqrt{2}} \begin{bmatrix} 1 & i \\ i & 1 \end{bmatrix},
+B = \frac{1}{\sqrt{2}} \begin{bmatrix} 1 & i \\ i & 1 \end{bmatrix},
 \end{equation}
 we can directly use an MZI network to implement \( Q \) and \( Q^H \).
 
