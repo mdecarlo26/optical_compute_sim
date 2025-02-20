@@ -1,0 +1,308 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage{hyperref}
+
+\begin{document}
+
+\title{\textbf{A Rigorous Treatment of the Beamsplitter and the Total Matrix of a Mach--Zehnder Interferometer (MZI)}}
+\author{}
+\date{\today}
+
+\maketitle
+
+\tableofcontents
+
+\section{Introduction}
+
+A beamsplitter (BS) is an essential linear optical component, used to split and combine electromagnetic waves in both classical and quantum optical setups.  A \emph{Mach--Zehnder Interferometer} (MZI) consists of two such beamsplitters plus two arms, at least one of which can introduce a controlled phase shift (e.g.\ via free-space path difference or an active modulator).  In many practical MZIs, reflections from mirrors in one (or both) arms also contribute fixed or additional phase shifts.
+
+In this document:
+\begin{itemize}
+    \item We review the beamsplitter as a linear, \emph{unitary} $2\times 2$ transformation.
+    \item We discuss its 50:50 (balanced) case, including a typical matrix representation with specific phase factors for reflection and transmission.
+    \item We derive the \emph{overall} matrix of an MZI, including phase shifts from the arms and/or mirrors.
+\end{itemize}
+
+\section{Beamsplitter as a Linear Transformation}
+
+\subsection{Fields and Amplitudes}
+
+Let $E_1$ and $E_2$ be the complex field amplitudes entering the two input ports of a beamsplitter.  We may arrange them in a column vector
+\begin{equation}
+  \begin{pmatrix}
+    E_1 \\[4pt]
+    E_2
+  \end{pmatrix}.
+\end{equation}
+Similarly, denote the two output port amplitudes by $E_1'$ and $E_2'$, forming
+\begin{equation}
+  \begin{pmatrix}
+    E_1' \\[4pt]
+    E_2'
+  \end{pmatrix}.
+\end{equation}
+A general \emph{linear, lossless} beamsplitter transformation can be written as
+\begin{equation}
+\label{eq:BSbasic}
+  \begin{pmatrix}
+    E_1' \\[3pt]
+    E_2'
+  \end{pmatrix}
+  \;=\;
+  U_{\text{BS}}
+  \begin{pmatrix}
+    E_1 \\[3pt]
+    E_2
+  \end{pmatrix},
+\end{equation}
+where $U_{\text{BS}}$ is a $2\times 2$ \emph{unitary} matrix.
+
+\subsection{Unitarity from Losslessness}
+
+A \emph{lossless} beamsplitter preserves total optical power (or intensity).  Classically, we require
+\begin{equation}
+  |E_1|^2 + |E_2|^2
+  \;=\;
+  |E_1'|^2 + |E_2'|^2
+  \quad
+  \text{for all } (E_1, E_2).
+\end{equation}
+By substituting Eq.~\eqref{eq:BSbasic}, one sees that this equality for \emph{all} input amplitudes is exactly the statement
+\[
+  U_{\text{BS}}^\dagger \, U_{\text{BS}} \;=\; I_{2\times 2},
+\]
+meaning $U_{\text{BS}}$ is \textbf{unitary}.  
+In a quantum framework (where each $E_j$ might be replaced by annihilation operators $\hat{a}_j$), the same requirement enforces that photon number (and commutation relations) be preserved, again leading to unitarity.
+
+\subsection{50:50 (Balanced) Splitting}
+
+A \emph{balanced} beamsplitter sends half the power to each output port if \emph{only one} port is excited at the input.  Concretely:
+\[
+  \bigl|E_1'\bigr|^2 = \bigl|E_2'\bigr|^2 
+  \;=\; \frac{1}{2} \, \bigl|E_{\text{in}}\bigr|^2
+  \quad
+  \text{when}
+  \begin{pmatrix}
+    E_1 \\ E_2
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    E_{\text{in}} \\ 0
+  \end{pmatrix}.
+\]
+Likewise if $E_1=0$ and $E_2\neq 0$.  That enforces $|r|^2 = |t|^2 = \tfrac12$ where $r,t$ are the reflection and transmission amplitudes, respectively.
+
+\subsection{Example: 50:50 Matrix with a \texorpdfstring{$\pi/2$}{pi/2} Phase Shift}
+
+A commonly encountered balanced beamsplitter matrix is
+\begin{equation}
+\label{eq:exBS}
+  U_{\text{BS}}
+  \;=\;
+  \frac{1}{\sqrt{2}}
+  \begin{pmatrix}
+    1 & i \\
+    i & 1
+  \end{pmatrix},
+\end{equation}
+which satisfies:
+\[
+  U_{\text{BS}}^\dagger U_{\text{BS}} = I,
+  \quad
+  |r| = |t| = \frac{1}{\sqrt{2}},
+  \quad
+  r = \frac{i}{\sqrt{2}},
+  \quad
+  t = \frac{1}{\sqrt{2}}.
+\]
+The $i$ (imaginary unit) factor indicates a relative $\pi/2$ phase shift in one of the reflection paths, a typical outcome of partial reflection from a thin-film coating.  Different physical devices can yield different phase conventions.
+
+\section{Mach--Zehnder Interferometer (MZI)}
+
+\subsection{Components}
+
+\begin{itemize}
+    \item \textbf{Two beamsplitters:} BS$_1$ and BS$_2$, each described by a (possibly identical) unitary $2\times 2$ matrix, often 50:50.
+    \item \textbf{Two arms (paths):} The outputs of BS$_1$ travel along two distinct paths before recombining at BS$_2$.
+    \item \textbf{Phase shifts:} 
+    \begin{enumerate}
+        \item \emph{Propagation phase} due to path length difference (or any additional phase modulator).
+        \item \emph{Mirror reflection(s)} in one or both arms, possibly introducing a fixed phase of $\pi$ (or $-1$ factor) per reflection.
+    \end{enumerate}
+\end{itemize}
+
+\subsection{Matrix Picture of the MZI}
+
+\paragraph{First Beamsplitter.}
+Call it $U_{\text{BS}_1}$.  It acts on the input amplitudes 
+\(\begin{pmatrix} E_1 \\ E_2 \end{pmatrix}\)
+to yield the two fields emerging from BS$_1$.
+
+\paragraph{Path Phases and Mirror Reflection.}
+Suppose the top path acquires a total phase $\phi_{\text{top}}$, while the bottom path has phase $\phi_{\text{bot}}$.  In matrix form, we can represent these phases via a \emph{diagonal} matrix
+\begin{equation}
+\label{eq:Dmatrix}
+  D(\phi_{\text{top}}, \phi_{\text{bot}})
+  \;=\;
+  \begin{pmatrix}
+    e^{i\phi_{\text{top}}} & 0 \\[4pt]
+    0 & e^{i\phi_{\text{bot}}}
+  \end{pmatrix}.
+\end{equation}
+For example, a mirror reflection in the top arm might add a fixed $\pi$ phase ($e^{i\pi} = -1$) or some design-specific phase shift.  Meanwhile, if the bottom arm has a different path length, that contributes $e^{i\phi_{\text{bot}}}$.  One often normalizes one path to 0 phase, letting the other path carry \emph{relative} phase $\phi = \phi_{\text{top}} - \phi_{\text{bot}}$.
+
+\paragraph{Second Beamsplitter.}
+Call it $U_{\text{BS}_2}$.  It recombines the two arms into the final output ports.  
+
+Hence, the full MZI transformation from inputs $\begin{pmatrix}E_1 \\ E_2\end{pmatrix}$ to outputs $\begin{pmatrix}E_1' \\ E_2'\end{pmatrix}$ is
+\begin{equation}
+\label{eq:U_MZI_def}
+  \begin{pmatrix}
+    E_1' \\[4pt]
+    E_2'
+  \end{pmatrix}
+  \;=\;
+  U_{\text{BS}_2}\,\,
+  D(\phi_{\text{top}}, \phi_{\text{bot}})\,\,
+  U_{\text{BS}_1}
+  \begin{pmatrix}
+    E_1 \\[3pt]
+    E_2
+  \end{pmatrix}.
+\end{equation}
+If $U_{\text{BS}_1}$ and $U_{\text{BS}_2}$ are each unitary, and $D(\phi_{\text{top}}, \phi_{\text{bot}})$ is also unitary (diagonal phases), then their product
+\[
+  U_{\text{MZI}}
+  \;\equiv\;
+  U_{\text{BS}_2}\,
+  D(\phi_{\text{top}}, \phi_{\text{bot}})\,
+  U_{\text{BS}_1}
+\]
+is itself a unitary $2\times 2$ matrix.
+
+\subsection{Including Mirror-Induced Phases Explicitly}
+
+\begin{figure}[ht]
+\centering
+\fbox{%
+  \parbox{0.8\textwidth}{\centering
+  \textbf{Schematic of an MZI with Mirrors:} \\
+  One or both arms may reflect off a mirror, incurring a phase factor $-1$ (i.e.\ $e^{i\pi}$) each time.  Additional path-length or modulator-induced phase shifts can appear as well.  The arms recombine on BS$_2$.}
+}
+\caption{Mach--Zehnder Interferometer with possible mirror reflections adding fixed phases.}
+\label{fig:MZI_mirror}
+\end{figure}
+
+Often, the top path has a mirror that adds a phase factor $e^{i\pi}=-1$, and the bottom path has either no mirror or a different reflection count.  We can incorporate all those reflection phases into $\phi_{\text{top}}$ and $\phi_{\text{bot}}$.  For example:
+\[
+  \phi_{\text{top}}
+  \;=\;
+  \phi_{\text{path}} + \pi,
+  \quad
+  \phi_{\text{bot}}
+  \;=\;
+  \phi_{0},
+\]
+where $\phi_{\text{path}}$ is a tunable phase difference from changing path length, and $\pi$ arises from reflection off the mirror in the top arm.  One can thereby account for how each reflection or transmission event might contribute an $i$ factor (for a partial reflection on the beamsplitter) or $-1$ factor (for a mirror reflection), etc.  
+
+In short, \emph{any} stable optical phase shift may be collected into $D(\phi_{\text{top}}, \phi_{\text{bot}})$, and the overall MZI matrix remains
+\[
+  U_{\text{MZI}} 
+  \;=\;
+  U_{\text{BS}_2}\,
+  D(\phi_{\text{top}}, \phi_{\text{bot}})\,
+  U_{\text{BS}_1}.
+\]
+
+\section{Explicit Example of the Overall MZI Matrix}
+
+For a concrete example, choose the same 50:50 beamsplitter matrix for both BS$_1$ and BS$_2$ as in Eq.~\eqref{eq:exBS}, i.e.:
+\[
+  U_{\text{BS}_1} 
+  \;=\;
+  U_{\text{BS}_2}
+  \;=\;
+  \frac{1}{\sqrt{2}}
+  \begin{pmatrix}
+    1 & i \\
+    i & 1
+  \end{pmatrix}.
+\]
+Let the \emph{top} arm gain a total phase $\phi_{\mathrm{t}}$ and the \emph{bottom} arm gain $\phi_{\mathrm{b}}$.  Then
+\[
+  D(\phi_{\mathrm{t}},\phi_{\mathrm{b}})
+  \;=\;
+  \begin{pmatrix}
+    e^{i\phi_{\mathrm{t}}} & 0 \\[2pt]
+    0 & e^{i\phi_{\mathrm{b}}}
+  \end{pmatrix}.
+\]
+Thus,
+\[
+  U_{\text{MZI}}
+  \;=\;
+  \frac{1}{\sqrt{2}}
+  \begin{pmatrix}
+    1 & i \\
+    i & 1
+  \end{pmatrix}
+  \begin{pmatrix}
+    e^{i\phi_{\mathrm{t}}} & 0 \\
+    0 & e^{i\phi_{\mathrm{b}}}
+  \end{pmatrix}
+  \frac{1}{\sqrt{2}}
+  \begin{pmatrix}
+    1 & i \\
+    i & 1
+  \end{pmatrix}.
+\]
+One can multiply these matrices to obtain the explicit $2\times 2$ form of $U_{\text{MZI}}$, from which one may deduce how $(E_1,E_2)$ map to $(E_1',E_2')$ for arbitrary phases $\phi_{\mathrm{t}}$ and $\phi_{\mathrm{b}}$.  In many treatments, one sets $\phi_{\mathrm{b}}=0$ for simplicity and looks at the \emph{relative} phase $\phi = \phi_{\mathrm{t}} - \phi_{\mathrm{b}}$.  Perfect constructive or destructive interference in one output port is then observed as $\phi$ is varied.
+
+\section{Conclusion}
+
+\begin{itemize}
+    \item \textbf{Beamsplitter:} A lossless $2\times 2$ \emph{unitary} matrix that linearly transforms two input fields to two output fields.  A 50:50 beamsplitter has $|r|^2=|t|^2=\tfrac12$, e.g.\ Eq.~\eqref{eq:exBS}.
+    \item \textbf{Mach--Zehnder Interferometer:} Formed by two beamsplitters and two arms.  Each arm can include phase shifts from mirrors and/or path length differences, modeled by a diagonal unitary matrix $D(\phi_{\mathrm{t}},\phi_{\mathrm{b}})$.  
+    \item \textbf{Overall Matrix:} The MZI transformation is
+    \[
+      U_{\text{MZI}}
+      \;=\;
+      U_{\text{BS}_2}\,
+      D(\phi_{\mathrm{t}}, \phi_{\mathrm{b}})\,
+      U_{\text{BS}_1},
+    \]
+    which remains unitary (energy-conserving).  Detailed interference patterns at the outputs arise from the interplay of beamsplitter reflections/transmissions and the phase factors $e^{i\phi_{\mathrm{t}}}$, $e^{i\phi_{\mathrm{b}}}$, including mirror-induced $\pi$ shifts.
+\end{itemize}
+
+This linear-algebraic approach explains quantitatively the interference fringes observed in an MZI, how mirror reflections contribute fixed phases, and how controllable path differences shift the output intensities between the two final ports.  In both classical and quantum optics, such an analysis underlies many fundamental interference experiments.
+
+\vspace{5mm}
+
+\begin{thebibliography}{9}
+
+\bibitem{GerryKnight}
+C.~C.~Gerry and P.~L.~Knight,
+\emph{Introductory Quantum Optics},
+Cambridge University Press (2004).
+
+\bibitem{ScullyZubairy}
+M.~O.~Scully and M.~S.~Zubairy,
+\emph{Quantum Optics},
+Cambridge University Press (1997).
+
+\bibitem{Fox}
+M.~Fox,
+\emph{Quantum Optics: An Introduction},
+Oxford University Press (2006).
+
+\bibitem{WallsMilburn}
+D.~F.~Walls and G.~J.~Milburn,
+\emph{Quantum Optics},
+Springer (2008).
+
+\end{thebibliography}
+
+\end{document}
