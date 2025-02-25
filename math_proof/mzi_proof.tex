@@ -1,9 +1,13 @@
 \documentclass[a4paper,12pt]{article}
-\usepackage{amsmath, amssymb, graphicx, physics, hyperref, bm}
+\usepackage{amsmath, amssymb, graphicx, physics, hyperref, bm,amsthm}
 \usepackage{geometry}
 \geometry{a4paper, margin=1in}
 \usepackage{titlesec}
 \usepackage{tocloft}
+\usepackage{wrapfig}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
 
 \begin{document}
 
@@ -180,6 +184,12 @@ M = \begin{bmatrix} e^{i\phi} & 0 \\ 0 & e^{i\psi} \end{bmatrix},
 where \( \phi \) and \( \psi \) are phase shifts depending on the optical path.
 
 \section{Mach-Zehnder Interferometer (MZI)}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{mzi_diagram.pdf}
+    \caption{Mach-Zehnder Interferometer Diagram}
+    \label{fig:mzi}
+\end{figure}
 An MZI consists of two beam splitters and phase shifters, modeled as:
 \begin{equation}
 U_{\text{MZI}} = B P B,
@@ -200,6 +210,118 @@ where:
     \item \( Q \) is a unitary matrix (can be implemented with fixed beam splitters),
     \item \( T \) is an upper triangular matrix (implemented using phase shifters).
 \end{itemize}
+The \textbf{Schur Decomposition} states that for any square complex matrix \( A \in \mathbb{C}^{n \times n} \), there exists a unitary matrix \( Q \) and an upper triangular matrix \( T \) such that:
+\begin{equation}
+    A = Q T Q^H,
+\end{equation}
+where:
+\begin{itemize}
+    \item \( Q \) is a \textbf{unitary matrix} (\( Q^H Q = I \)).
+    \item \( T \) is an \textbf{upper triangular matrix} whose diagonal entries are the eigenvalues of \( A \).
+    \item \( Q^H \) is the Hermitian transpose of \( Q \).
+\end{itemize}
+
+This decomposition is fundamental in numerical linear algebra, particularly for computing eigenvalues, solving matrix equations, and designing optical matrix multiplications.
+
+\subsection{\textbf{Preliminary Lemmas}}
+
+Before proving the Schur decomposition, we state two important lemmas.
+
+\begin{lemma}[Unitary Similarity Preserves Eigenvalues]
+    If \( B = U A U^H \) for some unitary matrix \( U \), then \( A \) and \( B \) have the same eigenvalues.
+\end{lemma}
+
+\begin{proof}
+    Suppose \( \lambda \) is an eigenvalue of \( A \) with eigenvector \( v \), so:
+    \[
+    A v = \lambda v.
+    \]
+    Multiplying both sides by \( U \),
+    \[
+    U A v = \lambda U v.
+    \]
+    Setting \( w = U v \), we get:
+    \[
+    B w = (U A U^H) U v = U A v = \lambda w.
+    \]
+    Thus, \( B \) has the same eigenvalues as \( A \).
+\end{proof}
+
+\begin{lemma}[Existence of a Unitary Basis for an Eigenvector]
+    Every complex matrix \( A \in \mathbb{C}^{n \times n} \) has at least one eigenvector that can be extended to form a unitary basis of \( \mathbb{C}^n \).
+\end{lemma}
+
+\begin{proof}
+    By the \textbf{fundamental theorem of algebra}, every square complex matrix has at least one eigenvalue \( \lambda_1 \) with a corresponding eigenvector \( v_1 \). The Gram-Schmidt process can be applied to extend \( v_1 \) into an orthonormal basis \( \{ v_1, v_2, \dots, v_n \} \), which forms a unitary matrix.
+\end{proof}
+
+\subsection{\textbf{Proof of the Schur Decomposition Theorem}}
+
+\begin{theorem}[Schur Decomposition]
+    For any complex matrix \( A \in \mathbb{C}^{n \times n} \), there exists a unitary matrix \( Q \) and an upper triangular matrix \( T \) such that:
+    \[
+    A = Q T Q^H.
+    \]
+\end{theorem}
+
+\begin{proof}
+    We prove this by induction on the size \( n \) of the matrix \( A \).
+
+    \textbf{Base Case (n = 1):} A \( 1 \times 1 \) matrix is trivially its own Schur form.
+
+    \textbf{Inductive Step:} Assume that for any \( (n-1) \times (n-1) \) complex matrix, there exists a unitary matrix \( Q_{n-1} \) such that:
+    \[
+    Q_{n-1}^H A_{n-1} Q_{n-1} = T_{n-1},
+    \]
+    where \( T_{n-1} \) is upper triangular.
+
+    Now, consider an \( n \times n \) matrix \( A \). By the eigenvalue existence theorem, let \( v_1 \) be an eigenvector of \( A \) corresponding to eigenvalue \( \lambda_1 \). Extend \( v_1 \) to form a unitary basis \( Q_1 = [v_1, v_2, \dots, v_n] \).
+
+    Construct the unitary matrix:
+    \[
+    Q = [v_1, Q_{n-1}],
+    \]
+    where \( Q_{n-1} \) orthonormally spans the remaining space.
+
+    Applying unitary similarity,
+    \[
+    Q^H A Q =
+    \begin{bmatrix}
+        \lambda_1 & w^H \\
+        0 & A'
+    \end{bmatrix},
+    \]
+    where \( w \) is some row vector and \( A' \) is an \( (n-1) \times (n-1) \) matrix.
+
+    By the induction hypothesis, \( A' \) has a Schur decomposition:
+    \[
+    A' = Q_{n-1} T' Q_{n-1}^H.
+    \]
+
+    Substituting back, we get:
+    \[
+    Q^H A Q =
+    \begin{bmatrix}
+        \lambda_1 & w^H \\
+        0 & Q_{n-1} T' Q_{n-1}^H
+    \end{bmatrix}.
+    \]
+
+    Since \( Q_{n-1} \) is unitary, it preserves triangularity:
+    \[
+    T =
+    \begin{bmatrix}
+        \lambda_1 & w^H \\
+        0 & T'
+    \end{bmatrix},
+    \]
+    which is upper triangular. Thus, we obtain:
+    \[
+    A = Q T Q^H.
+    \]
+\end{proof}
+
+
 
 \section{Embedding an Arbitrary Matrix into an MZI for Matrix Multiplication}
 Given an arbitrary \( 2 \times 2 \) matrix \( A \), we compute the Schur decomposition:

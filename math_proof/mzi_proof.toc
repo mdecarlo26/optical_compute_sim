@@ -10,7 +10,9 @@
 \contentsline {subsection}{\numberline {2.3}Mirrors}{4}{subsection.2.3}%
 \contentsline {section}{\numberline {3}Mach-Zehnder Interferometer (MZI)}{4}{section.3}%
 \contentsline {section}{\numberline {4}Complex Schur Decomposition}{4}{section.4}%
-\contentsline {section}{\numberline {5}Embedding an Arbitrary Matrix into an MZI for Matrix Multiplication}{4}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Implementing Q Using Fixed Beam Splitters}{4}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Implementing T Using Phase Shifters}{5}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Final Optical Implementation}{5}{subsection.5.3}%
+\contentsline {subsection}{\numberline {4.1}\textbf {Preliminary Lemmas}}{5}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}\textbf {Proof of the Schur Decomposition Theorem}}{6}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Embedding an Arbitrary Matrix into an MZI for Matrix Multiplication}{6}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Implementing Q Using Fixed Beam Splitters}{7}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Implementing T Using Phase Shifters}{7}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Final Optical Implementation}{7}{subsection.5.3}%

@@ -1,0 +1,199 @@
+\documentclass[conference]{IEEEtran}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{hyperref}
+
+\hypersetup{%
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
+\begin{document}
+
+\title{A Reconfigurable Photonic Interferometric Computing Framework for Low-Power\\
+Matrix Operations and Small-Scale Machine Learning}
+
+\author{
+\IEEEauthorblockN{Santiago Sosa\IEEEauthorrefmark{1}, Marc DeCarlo\IEEEauthorrefmark{2}}
+\IEEEauthorblockA{\IEEEauthorrefmark{1}Department of Electrical and Computer Engineering, Drexel University, Philadelphia, United States of America\\
+Email: ss5427@drexel.edu}
+\IEEEauthorblockA{\IEEEauthorrefmark{2}Department of Electrical and Computer Engineering, Drexel University, Philadelphia, United States of America\\
+Email: mad534@drexel.edu}
+}
+
+\maketitle
+
+\begin{abstract}
+Photonic computing is an emerging paradigm that leverages the high bandwidth and parallelism of optical signals to perform arithmetic operations at low power and high speed. This proposal outlines a 6--12 month project to design, implement, and evaluate a reconfigurable photonic computing framework centered on Mach-Zehnder interferometers (MZIs) or similar optical components. The main contribution is a novel low-level control software stack with real-time calibration algorithms, enabling reliable matrix computations and basic machine learning (ML) tasks on a compact photonic platform. The work spans device-level modeling, algorithmic design, and an end-to-end demonstration of energy-efficient optical matrix operations, potentially providing a pathway toward more scalable optical accelerators.
+\end{abstract}
+
+\IEEEpeerreviewmaketitle
+
+\vspace{2mm}
+\section{Introduction}
+The demand for computational resources continues to surge due to data-intensive applications in artificial intelligence, cryptography, and scientific simulations \cite{top500}. Conventional electronic hardware, constrained by the slowing of Moore's Law and thermal limitations, may not meet the growing need for high-throughput, low-latency operations. Consequently, novel computing paradigms are being investigated to overcome these bottlenecks.
+
+Photonic (or optical) computing has garnered increasing attention for its inherent advantages: low latency, low crosstalk, and extremely high bandwidth \cite{miller2017device}. By encoding information in light and using interferometric devices, certain arithmetic operations---especially matrix multiplications---can be performed \emph{in analog} at high speed and with modest power consumption. Various research groups have demonstrated prototype photonic chips capable of implementing small-scale matrix-vector multiplications pertinent to neural networks and signal processing \cite{shen2017deep, harris2018linear}.
+
+Despite these achievements, there are two major challenges preventing broader adoption of photonic computing:
+\begin{itemize}
+    \item \textbf{Reconfigurability and Calibration}: Interferometric networks are sensitive to temperature, fabrication mismatch, and device drift, necessitating active calibration algorithms.
+    \item \textbf{Low-Level Programming Models}: There is a pressing need for a robust \emph{software stack} that abstracts the complexities of optical hardware and provides stable, high-level APIs to computational scientists.
+\end{itemize}
+
+The proposed project aims to address these issues via a focus on \emph{reconfigurable photonic interferometric computing} (RPIC) to perform matrix transformations relevant to both HPC and ML tasks. The tight coupling of novel calibration algorithms with domain-specific compilers is expected to yield a reliable platform for small-scale but high-impact demonstrations of optical computing.
+
+\section{Background and Related Work}
+
+\subsection{Photonic Interferometric Computing}
+Modern photonic computing architectures often employ a mesh of Mach-Zehnder interferometers (MZIs) to realize \emph{unitary transformations} across multiple optical channels. The seminal work by Reck \emph{et al.} \cite{reck1994experimental} and later improvements by Clements \emph{et al.} \cite{clements2016optimal} demonstrate how reconfigurable arrays of beam splitters and phase shifters can implement arbitrary $N\times N$ linear transformations in an optical network. 
+
+Such MZI meshes can be repurposed for \emph{matrix multiplication}, a fundamental operation in HPC and ML (e.g., in neural network layers). However, errors introduced by phase drifts and coupling losses degrade accuracy unless carefully managed. Prior demonstrations have often been point solutions, lacking generalizable calibration frameworks or robust software stacks.
+
+\subsection{Calibration and Control}
+High-density photonic circuits require continuous or periodic calibration to compensate for:
+\begin{itemize}
+    \item \textbf{Thermal Drift}: Slight temperature variations change the refractive index and hence the effective optical path length.
+    \item \textbf{Fabrication Deviations}: Phase shifters and splitters may exhibit mismatch from their nominal design.
+    \item \textbf{Analog Noise}: Real-time fluctuations in voltage drivers and optical sources affect phase accuracy.
+\end{itemize}
+Several approaches for calibration range from straightforward iterative scans \cite{shen2017deep} to more advanced machine learning techniques \cite{harris2018linear}. However, these are often \emph{ad hoc}, restricted to a specific hardware layout.
+
+\subsection{Low-Level Software for Photonic Hardware}
+While fields like FPGA-based computing or GPU programming have mature toolchains (e.g., Vivado, CUDA), the photonics domain still lacks widely adopted frameworks for systematically mapping matrix operations onto reconfigurable optical networks. Efforts typically rely on manual parameter tuning or small scripts with limited reusability. A more comprehensive approach would:
+\begin{itemize}
+    \item Offer device abstractions for setting phases, reading intensity outputs, and measuring errors.
+    \item Provide a “photonic instruction set” to orchestrate multiple operations (load input, configure MZIs, measure output, etc.).
+    \item Integrate real-time feedback loops for drift compensation.
+\end{itemize}
+
+\section{Project Objectives}
+This proposal has three interlinked goals, each addressing key constraints of photonic computing:
+
+\subsection{Objective A: Photonic Device Integration \& Modeling}
+\begin{itemize}
+    \item \textbf{Model Development}: Construct or adapt a device-level simulator (in Python/Matlab/C++) that captures the transfer functions of MZIs, including phase-voltage relationships, insertion losses, and noise sources.
+    \item \textbf{Hardware Setup}: If available, integrate an existing photonic chip featuring a small (e.g., 4$\times$4 or 8$\times$8) MZI mesh into a lab testbed with tunable lasers, photodiodes, and control electronics.
+\end{itemize}
+
+\subsection{Objective B: Control Software and Calibration Algorithms}
+\begin{itemize}
+    \item \textbf{Firmware/Driver Layer}: Implement real-time microcontroller or FPGA-based phase control for each element in the mesh. 
+    \item \textbf{Calibration Routines}: Develop iterative or ML-based algorithms to converge on the desired matrix transformation while minimizing drift effects.
+    \item \textbf{Error-Correction Strategies}: Explore partial digital correction of analog noise, or advanced feedback loops that adapt phases in real time.
+\end{itemize}
+
+\subsection{Objective C: Demonstration of Matrix Computations}
+\begin{itemize}
+    \item \textbf{Matrix Multiplication}: Configure the mesh to multiply a given input vector by a user-defined $N\times N$ matrix (within the scale of the available hardware).
+    \item \textbf{Small ML Tasks}: Demonstrate a single-layer inference operation (e.g., a fully connected layer) to showcase an ML use case.
+    \item \textbf{Benchmarking}: Measure speed, energy, and accuracy relative to an electronic baseline (CPU or GPU) under a small but realistic dataset.
+\end{itemize}
+
+\section{Proposed Methodology}
+
+\subsection{System Architecture}
+Fig. \ref{fig:system_arch} illustrates the overall architecture. The photonic chip is driven by a digital-to-analog converter (DAC) array for setting phases, while outputs are monitored by a set of photodiodes connected to an analog-to-digital converter (ADC). A microcontroller or FPGA provides real-time feedback. A host computer (e.g., a Python environment) runs higher-level control scripts and compiles matrix operations into device-level commands.
+
+% \begin{figure}[ht]
+%     \centering
+%     \includegraphics[width=0.43\textwidth]{example_architecture.png} % Placeholder
+%     \caption{Proposed system architecture for the reconfigurable photonic computing framework.}
+%     \label{fig:system_arch}
+% \end{figure}
+
+\subsection{Calibration and Configuration}
+\begin{enumerate}
+    \item \textbf{Phase Characterization}: Each MZI element undergoes a one-time scan over its full driving voltage range to map voltage to optical phase shift.
+    \item \textbf{Iterative Calibration}: To realize a target matrix $A$, an iterative algorithm (e.g., gradient descent) updates the phases $\{\theta_i\}$ to minimize $\| A_{\text{optical}}(\theta) x - A x \|$ for a representative set of inputs $x$.
+    \item \textbf{Drift Compensation}: Deploy a real-time feedback loop that continuously monitors outputs for reference inputs and adjusts $\theta_i$ to maintain accuracy.
+\end{enumerate}
+
+\subsection{Software Stack and Compiler}
+\begin{enumerate}
+    \item \textbf{Device-Level API}: A library (in C/C++ or Python) providing functions to set phases, measure outputs, and query calibration states.
+    \item \textbf{Matrix Mapping Tool}: A compilation layer that takes user commands (e.g., ``multiply vector $x$ by matrix $A$’’) and translates them into phase settings and readout configurations.
+    \item \textbf{Integration with HPC/ML Libraries}: If time permits, develop a rudimentary interface (e.g., a plug-in for NumPy or PyTorch) that offloads matrix operations to the photonic device.
+\end{enumerate}
+
+\subsection{Benchmarking Protocol}
+\begin{itemize}
+    \item \textbf{Workloads}: Perform matrix multiplication for dimensions $4\times4$ or $8\times8$, and optionally a small fully connected layer for an ML test (e.g., on random data or a toy dataset).
+    \item \textbf{Metrics}: Measure execution latency, throughput (OPS or approximate FLOPS), energy consumption (if a photonic power meter is available), and accuracy (mean squared error or classification accuracy).
+    \item \textbf{Comparisons}: Compare with a baseline CPU or embedded GPU for identical tasks and input sizes.
+\end{itemize}
+
+\section{Preliminary Work and Feasibility}
+The research group at the University of Example has previously tested a single MZI device for optical beam steering and verified the feasibility of direct microcontroller-based phase control. The group also has access to a 4$\times$4 MZI-based photonic chip from a multi-project wafer (MPW) run. Preliminary data suggests phase stability of about 5--10 minutes before re-calibration is needed. Hence, the hardware integration risk is moderate but manageable.
+
+If the hardware approach encounters delays or if the photonic device is unavailable, a high-fidelity simulator with experimentally validated parameters will be used to emulate the 4$\times$4 or 8$\times$8 mesh in real time. This simulator-based approach still allows rigorous testing of the calibration algorithms and the software stack, though power and speed metrics would be approximate.
+
+\section{Project Plan and Timeline}
+The entire project is scoped for 6--12 months to match a short-term grant or advanced undergraduate/graduate research project:
+
+\subsection{Months 1--2: Setup and Low-Level Infrastructure}
+\begin{itemize}
+    \item Complete literature survey on photonic interferometric networks.
+    \item Build or refine the device-level simulator (Python/Matlab).
+    \item Establish the hardware testbed: configure laser sources, photodiodes, DAC/ADC boards, and microcontroller/FPGA environment.
+\end{itemize}
+
+\subsection{Months 3--4: Calibration and Basic Matrix Multiplication}
+\begin{itemize}
+    \item Implement iterative calibration and drift compensation routines.
+    \item Demonstrate the ability to realize at least one 4$\times$4 matrix multiplication on the physical chip or simulator.
+    \item Validate accuracy, measure drift, and refine control software.
+\end{itemize}
+
+\subsection{Months 5--6: ML Demonstrations and Benchmarking}
+\begin{itemize}
+    \item Integrate a simple ML kernel (e.g., a single-layer perceptron) onto the photonic hardware.
+    \item Compare speed, energy (if hardware-based), and accuracy to CPU/GPU benchmarks for small data sets.
+    \item Prepare initial results for a conference submission or internal report.
+\end{itemize}
+
+\subsection{Months 7--12: Extensions (If Available)}
+\begin{itemize}
+    \item Explore advanced error-correction methods (machine learning-based calibration, partial digital redundancy).
+    \item Scale to larger arrays (e.g., 8$\times$8) if a second-generation chip or design is accessible.
+    \item Publish final results in a photonics or hardware-oriented conference/journal.
+\end{itemize}
+
+\section{Expected Contributions}
+\begin{enumerate}
+    \item A validated \textbf{device-level simulator} or experimental setup that characterizes MZI-based photonic hardware for computing tasks.
+    \item A robust \textbf{low-level control software} framework with real-time calibration, suitable for other researchers to adapt.
+    \item Demonstrated ability to perform \textbf{basic matrix operations} and a small ML inference task on the photonic chip or simulator, with performance metrics for speed, accuracy, and power.
+\end{enumerate}
+
+\section{Conclusion}
+This project will significantly advance the state-of-the-art in photonic computing by emphasizing the often-neglected aspect of \emph{low-level software control and rigorous calibration methods}. The successful demonstration of reconfigurable matrix operations on a small-scale photonic device (4$\times$4 or 8$\times$8 MZI mesh) will highlight the potential for broader adoption of optical computing in energy-efficient HPC and ML workloads. The short, 6--12 month timeline is feasible given existing hardware availability and prior group experience, making it a compelling opportunity to deliver impactful, publishable results in the rapidly evolving field of photonic computing.
+
+\bibliographystyle{IEEEtran}
+\begin{thebibliography}{99}
+
+\bibitem{top500}
+Top500 Supercomputer Sites: \url{https://www.top500.org} (accessed Feb. 2025).
+
+\bibitem{miller2017device}
+D.~A.~B. Miller, ``Device requirements for optical interconnects to silicon chips,'' \emph{Proc. IEEE}, vol.~97, no.~7, pp. 1166--1185, 2017.
+
+\bibitem{shen2017deep}
+Y.~Shen, N.~C. Harris, S.~Skirlo \emph{et al.}, ``Deep learning with coherent nanophotonic circuits,'' \emph{Nature Photonics}, vol.~11, no.~7, pp. 441--446, 2017.
+
+\bibitem{harris2018linear}
+N.~C. Harris, Y.~Zhou, M.~Prabhu \emph{et al.}, ``Linear programmable nanophotonic processors,'' \emph{Optica}, vol.~5, no.~12, pp. 1623--1631, 2018.
+
+\bibitem{reck1994experimental}
+M.~Reck, A.~Zeilinger, H.~J. Bernstein, and P.~Bertani, ``Experimental realization of any discrete unitary operator,'' \emph{Phys. Rev. Lett.}, vol.~73, no.~1, p.~58, 1994.
+
+\bibitem{clements2016optimal}
+W.~R. Clements, P.~C. Humphreys, B.~J. Metcalf \emph{et al.}, ``An optimal design for universal multiport interferometers,'' \emph{Optica}, vol.~3, no.~12, pp. 1460--1465, 2016.
+
+\end{thebibliography}
+
+\end{document}
